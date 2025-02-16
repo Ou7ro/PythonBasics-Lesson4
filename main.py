@@ -10,10 +10,16 @@ coordinates_middle = (20, 0, width-20, height)
 coordinates_right = (0, 0, width-40, height)
 
 left_red = red.crop(coordinates_left)
-right_blue = blue.crop(coordinates_right)
-middle_green = green.crop(coordinates_middle)
+middle_red = red.crop(coordinates_middle)
+main_red = Image.blend(left_red, middle_red, 0)
 
-image = Image.merge('RGB', (left_red, middle_green, right_blue))
+right_blue = blue.crop(coordinates_right)
+middle_blue = blue.crop(coordinates_middle)
+main_blue = Image.blend(right_blue, middle_blue, 0)
+
+main_green = green.crop(coordinates_middle)
+
+image = Image.merge('RGB', (main_red, main_green, main_blue))
 image.save('monro_max_size.jpg')
 
 image.thumbnail((80, 80))
